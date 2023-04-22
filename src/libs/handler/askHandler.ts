@@ -1,5 +1,3 @@
-import { options } from "@/pages/api/auth/[...nextauth]";
-import { getServerSession } from "next-auth";
 import textCleaner from "../algorithms/textCleaner";
 import kmp from "../algorithms/string-matching/kmp";
 import bm from "../algorithms/string-matching/bm";
@@ -16,10 +14,9 @@ type QnAWithPercentage = QnA & { similarityPercentage: number };
 
 const askHandler = async (
   question: string,
-  method: string
+  method: string,
+  session: any
 ): Promise<string> => {
-  const session = await getServerSession(options);
-
   question = textCleaner(question);
 
   const userQnA = await prisma.qnA.findMany({
@@ -36,6 +33,8 @@ const askHandler = async (
   const QnAs = [...userQnA, ...globalQnA];
   const QnAs_with_percentage: QnAWithPercentage[] = [];
 
+  let answer: string | undefined;
+
   QnAs.forEach((QnA) => {
     const exactMatching =
       method === "kmp"
@@ -43,33 +42,32 @@ const askHandler = async (
         : bm(QnA.question, question);
 
     if (exactMatching) {
-      return QnA.answer;
+      answer = QnA.answer;
+    } else {
+      const similarityPercentage = similarityCheck(QnA.question, question);
+      QnAs_with_percentage.push({
+        ...QnA,
+        similarityPercentage,
+      });
     }
-
-    const similarityPercentage = similarityCheck(QnA.question, question);
-    QnAs_with_percentage.push({
-      ...QnA,
-      similarityPercentage,
-    });
   });
 
   QnAs_with_percentage.sort(
     (a, b) => b.similarityPercentage - a.similarityPercentage
   );
 
-  if (QnAs_with_percentage.length === 0) {
+  if (answer) return answer;
+  else if (QnAs_with_percentage.length === 0) {
     return `Pertanyaan tidak ditemukan di database!`;
   } else if (QnAs_with_percentage[0].similarityPercentage > 0.9) {
     return QnAs_with_percentage[0].answer;
   } else {
-    return `Pertanyaan tidak ditemukan di database!\n 
-            Apakah maksud anda:\n
-            ${QnAs_with_percentage.slice(
-              0,
-              Math.max(3, QnAs_with_percentage.length)
-            )
-              .map((QnA, index) => index.toString() + ". " + QnA.question + "?")
-              .join("\n")}
+    return `Pertanyaan tidak ditemukan di database!\nApakah maksud anda:\n${QnAs_with_percentage.slice(
+      0,
+      Math.min(3, QnAs_with_percentage.length)
+    )
+      .map((QnA, index) => (index + 1).toString() + ". " + QnA.question + "?")
+      .join("\n")}
             `;
   }
 };

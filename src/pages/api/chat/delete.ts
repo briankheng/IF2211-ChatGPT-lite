@@ -10,7 +10,7 @@ export default async function handler(
   if (req.method !== "DELETE") return res.status(405).end();
 
   const { chatId } = req.body;
-  const session = await getServerSession(options);
+  const session = await getServerSession(req, res, options);
 
   if (!session) return res.status(401).end();
 

@@ -1,5 +1,3 @@
-import { options } from "@/pages/api/auth/[...nextauth]";
-import { getServerSession } from "next-auth";
 import textCleaner from "../algorithms/textCleaner";
 import kmp from "../algorithms/string-matching/kmp";
 import similarityCheck from "../algorithms/string-matching/similarityCheck";
@@ -13,9 +11,7 @@ type QnA = {
 
 type QnAWithPercentage = QnA & { similarityPercentage: number };
 
-const addHandler = async (query: string): Promise<string> => {
-  const session = await getServerSession(options);
-
+const addHandler = async (query: string, session: any): Promise<string> => {
   let question = query.split("pertanyaan")[1].split("dengan")[0].trim();
   let answer = query.split("jawaban")[1].trim();
 

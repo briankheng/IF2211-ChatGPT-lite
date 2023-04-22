@@ -15,7 +15,7 @@ export default async function handler(
   if (req.method !== "POST") return res.status(405).end();
 
   const { query, method, chatId } = req.body;
-  const session = await getServerSession(options);
+  const session = await getServerSession(req, res, options);
 
   if (!session) return res.status(401).end();
 
@@ -38,13 +38,13 @@ export default async function handler(
       response = calculator(query);
       break;
     case "add":
-      response = await addHandler(query);
+      response = await addHandler(query, session);
       break;
     case "delete":
-      response = await deleteHandler(query);
+      response = await deleteHandler(query, session);
       break;
     case "ask":
-      response = await askHandler(query, method);
+      response = await askHandler(query, method, session);
       break;
 
     default:
