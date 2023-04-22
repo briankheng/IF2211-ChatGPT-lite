@@ -9,7 +9,7 @@ export default async function handler(
 ) {
   if (req.method !== "POST") return res.status(405).end();
 
-  const session = await getServerSession(options);
+  const session = await getServerSession(req, res, options);
 
   if (!session) return res.status(401).end();
 
