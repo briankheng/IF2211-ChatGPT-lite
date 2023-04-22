@@ -19,14 +19,6 @@ export default async function handler(
 
   if (!session) return res.status(401).end();
 
-  await prisma.message.create({
-    data: {
-      text: query,
-      user: { connect: { email: session?.user?.email as string } },
-      chat: { connect: { id: chatId } },
-    },
-  });
-
   const classification = regex(query);
   let response = "";
 
