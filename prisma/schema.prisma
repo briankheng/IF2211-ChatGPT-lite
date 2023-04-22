@@ -67,13 +67,13 @@ model Chat {
 }
 
 model Message {
-  id          String   @id @default(cuid())
-  text        String
-  createdAt   DateTime @default(now())
-  createdBy   User?    @relation(fields: [createdById], references: [id], onDelete: Cascade)
-  createdById String?
-  chat        Chat?    @relation(fields: [chatId], references: [id], onDelete: Cascade)
-  chatId      String?
+  id        String   @id @default(cuid())
+  text      String
+  createdAt DateTime @default(now())
+  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String?
+  chat      Chat?    @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  chatId    String?
 }
 
 model QnA {

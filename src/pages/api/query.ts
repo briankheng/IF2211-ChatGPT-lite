@@ -22,7 +22,7 @@ export default async function handler(
   await prisma.message.create({
     data: {
       text: query,
-      createdBy: { connect: { email: session?.user?.email as string } },
+      user: { connect: { email: session?.user?.email as string } },
       chat: { connect: { id: chatId } },
     },
   });
@@ -55,7 +55,7 @@ export default async function handler(
   await prisma.message.create({
     data: {
       text: response,
-      createdBy: { connect: { email: "chatgpt@gmail.com" } },
+      user: { connect: { email: "chatgpt@gmail.com" } },
       chat: { connect: { id: chatId } },
     },
   });
