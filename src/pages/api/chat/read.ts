@@ -13,14 +13,19 @@ export default async function handler(
 
   if (!session) return res.status(401).end();
 
-  const chats = await prisma.chat.findMany({
-    where: {
-      user: { email: session?.user?.email },
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
+  try {
+    const chats = await prisma.chat.findMany({
+      where: {
+        user: { email: session?.user?.email },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
 
-  res.status(200).json(chats);
+    res.status(200).json(chats);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
 }

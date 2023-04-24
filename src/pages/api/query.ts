@@ -19,38 +19,43 @@ export default async function handler(
 
   if (!session) return res.status(401).end();
 
-  const classification = regex(query);
-  let response = "";
+  try {
+    const classification = regex(query);
+    let response = "";
 
-  switch (classification) {
-    case "date":
-      response = date(query);
-      break;
-    case "calculator":
-      response = calculator(query);
-      break;
-    case "add":
-      response = await addHandler(query, session);
-      break;
-    case "delete":
-      response = await deleteHandler(query, session);
-      break;
-    case "ask":
-      response = await askHandler(query, method, session);
-      break;
+    switch (classification) {
+      case "date":
+        response = date(query);
+        break;
+      case "calculator":
+        response = calculator(query);
+        break;
+      case "add":
+        response = await addHandler(query, session);
+        break;
+      case "delete":
+        response = await deleteHandler(query, session);
+        break;
+      case "ask":
+        response = await askHandler(query, method, session);
+        break;
 
-    default:
-      response = "Maaf, saya tidak mengerti pertanyaan Anda.";
-      break;
+      default:
+        response = "Maaf, saya tidak mengerti pertanyaan Anda.";
+        break;
+    }
+
+    await prisma.message.create({
+      data: {
+        text: response,
+        user: { connect: { email: "chatgpt@gmail.com" } },
+        chat: { connect: { id: chatId } },
+      },
+    });
+
+    res.status(200).json(response);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
   }
-
-  await prisma.message.create({
-    data: {
-      text: response,
-      user: { connect: { email: "chatgpt@gmail.com" } },
-      chat: { connect: { id: chatId } },
-    },
-  });
-
-  res.status(200).json(response);
 }

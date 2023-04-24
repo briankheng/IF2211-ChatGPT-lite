@@ -1,9 +1,13 @@
 const textCleaner = (text: string): string => {
-  const { StopwordsId, StemmerId } = require("@nlpjs/lang-id");
-  const stemmer = new StemmerId();
-  stemmer.stopwords = new StopwordsId();
+  const { NormalizerId, TokenizerId, StopwordsId } = require("@nlpjs/lang-id");
 
-  return stemmer.tokenizeAndStem(text, false).join(" ");
+  const normalizer = new NormalizerId();
+  const tokenizer = new TokenizerId();
+  const stopwords = new StopwordsId();
+
+  return stopwords
+    .removeStopwords(tokenizer.tokenize(normalizer.normalize(text)))
+    .join(" ");
 };
 
 export default textCleaner;
