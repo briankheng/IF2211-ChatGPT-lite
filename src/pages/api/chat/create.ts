@@ -13,11 +13,16 @@ export default async function handler(
 
   if (!session) return res.status(401).end();
 
-  const newChat = await prisma.chat.create({
-    data: {
-      user: { connect: { email: session?.user?.email as string } },
-    },
-  });
+  try {
+    const newChat = await prisma.chat.create({
+      data: {
+        user: { connect: { email: session?.user?.email as string } },
+      },
+    });
 
-  res.status(200).json(newChat);
+    res.status(200).json(newChat);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
 }

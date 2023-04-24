@@ -14,13 +14,18 @@ export default async function handler(
 
   if (!session) return res.status(401).end();
 
-  const newMessage = await prisma.message.create({
-    data: {
-      text: text,
-      user: { connect: { email: session?.user?.email as string } },
-      chat: { connect: { id: chatId } },
-    },
-  });
+  try {
+    const newMessage = await prisma.message.create({
+      data: {
+        text: text,
+        user: { connect: { email: session?.user?.email as string } },
+        chat: { connect: { id: chatId } },
+      },
+    });
 
-  res.status(200).json(newMessage);
+    res.status(200).json(newMessage);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
 }

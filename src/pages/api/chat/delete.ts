@@ -14,9 +14,14 @@ export default async function handler(
 
   if (!session) return res.status(401).end();
 
-  const deletedChat = await prisma.chat.delete({
-    where: { id: chatId },
-  });
+  try {
+    const deletedChat = await prisma.chat.delete({
+      where: { id: chatId },
+    });
 
-  res.status(200).json(deletedChat);
+    res.status(200).json(deletedChat);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
 }
