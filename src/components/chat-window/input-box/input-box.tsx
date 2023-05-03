@@ -13,9 +13,10 @@ const InputBox: React.FC<InputBoxProps> = ({
   onSendMessage,
 }) => {
   const [textAreaHeight, setTextAreaHeight] = useState("auto");
+  const [isSendClicked, setIsSendClicked] = useState(false); // new state for checking send button click
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const maxHeight = "200px"; // set max height for the textarea
-  const minHeight = "20px"; // set min height for the textarea
+  const minHeight = "24px"; // set min height for the textarea
 
   useEffect(() => {
     if (textAreaRef.current) {
@@ -24,8 +25,11 @@ const InputBox: React.FC<InputBoxProps> = ({
   }, [message]);
 
   const onButtonClick = () => {
-    setTextAreaHeight("auto");
+    setIsSendClicked(true); // set state to true when send button clicked
     onSendMessage();
+    if (textAreaRef.current) {
+      textAreaRef.current.style.height = minHeight; // set height to min height when send button clicked
+    }
   };
 
   const onInput = () => {
@@ -45,6 +49,14 @@ const InputBox: React.FC<InputBoxProps> = ({
       }
     }
   };
+
+  useEffect(() => {
+    if (!isSendClicked && textAreaRef.current) {
+      // set height back to auto when send button not clicked
+      textAreaRef.current.style.height = "auto";
+      setIsSendClicked(false); // set state back to false
+    }
+  }, [isSendClicked]);
 
   return (
     <div className="bg-custom-input_box relative flex border border-gray-900/50 shadow-[0_0_15px_rgba(0,0,0,0.10)] justify-between rounded-md items-center mx-4 my-4 r p-2 pl-4 w-100 place">
