@@ -1,4 +1,4 @@
-import SendIcon from "../../../../public/sendIcon";
+import SendIcon from "../../../assets/sendIcon";
 
 interface SendButtonProps {
     onSendMessage: () => void;

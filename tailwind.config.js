@@ -12,6 +12,7 @@ module.exports = {
           user: '#343541',
           chatbot: '#444654',
           input_box: '#40414F',
+          chat_hover: '#2A2B32',
         },
       },
     },
