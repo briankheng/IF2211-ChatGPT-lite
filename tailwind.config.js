@@ -9,7 +9,9 @@ module.exports = {
         custom: {
           chat_window: '#343541',
           sidebar: '#202123',
-          chat_user: '#444654',
+          user: '#343541',
+          chatbot: '#444654',
+          input_box: '#40414F',
         },
       },
     },
