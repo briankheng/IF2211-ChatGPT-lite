@@ -20,9 +20,8 @@ const SideBarPage = () => {
           <div style={{ width: "93%" }}>
             <NewChatButton chatMutate={chatMutate}/>
           </div>
-          <Link href="/api/auth/signin">Login</Link>
         </div>
-        <div className="flex flex-col mt-20" style={{ height: "calc(100% - 140px)" }}>
+        <div className="flex flex-col mt-10" style={{ height: "calc(100% - 140px)" }}>
           <div className="overflow-y-scroll flex-1" style={{ paddingRight: "5px" }}>
             <ChatHistory chats={chats} chatLoading={chatLoading} chatMutate={chatMutate}/>
           </div>

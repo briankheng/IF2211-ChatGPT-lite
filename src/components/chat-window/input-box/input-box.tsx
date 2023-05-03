@@ -15,7 +15,7 @@ const InputBox: React.FC<InputBoxProps> = ({
   const [textAreaHeight, setTextAreaHeight] = useState("auto");
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const maxHeight = "200px"; // set max height for the textarea
-  const minHeight = "40px"; // set min height for the textarea
+  const minHeight = "20px"; // set min height for the textarea
 
   useEffect(() => {
     if (textAreaRef.current) {
