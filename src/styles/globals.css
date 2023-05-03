@@ -5,3 +5,15 @@
 body {
   @apply bg-zinc-900;
 }
+
+/* Mengubah tampilan scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Mengubah tampilan thumb scrollbar */
+::-webkit-scrollbar-thumb {
+  background-color: #4a4a4a;
+  border-radius: 4px;
+}
+

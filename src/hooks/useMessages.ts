@@ -6,6 +6,7 @@ const useMessages = (chatId: string) => {
     chatId ? `/api/message/${chatId}` : null,
     fetcher
   );
+  
   return {
     messages: data,
     isLoading: !error && !data,

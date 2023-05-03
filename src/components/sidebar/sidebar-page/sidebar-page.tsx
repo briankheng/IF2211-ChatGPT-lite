@@ -1,27 +1,48 @@
+import AlgorithmSelect from "../algorithm-select/algorithm-select";
 import NewChatButton from "../new-chat-button/new-chat-button";
+import ChatHistory from "../chat-history/chat-history";
+import Link from "next/link";
+import SignOutButton from "../sign-out.tsx/sign-out";
+
+import useChats from "@/hooks/useChats";
+
 
 const SideBarPage = () => {
-    return (
-        <aside className="bg-custom-sidebar text-white p-4 w-64 flex-shrink-0">
-            <NewChatButton/>
-            <div className="flex items-center mb-2">
-            </div>
-            <div className="bg-white shadow rounded-lg p-4 mb-4">
-            <h3 className="text-lg font-medium mb-2">Recent Chats</h3>
-            <ul>
-                <li className="text-gray-600 cursor-pointer hover:text-green-400">
-                Jane Doe
-                </li>
-                <li className="text-gray-600 cursor-pointer hover:text-green-400">
-                Bob Smith
-                </li>
-                <li className="text-gray-600 cursor-pointer hover:text-green-400">
-                Sarah Johnson
-                </li>
-            </ul>
-            </div>
-        </aside>
-    );
-}
+    const { 
+      chats, 
+      isLoading: chatLoading, 
+      mutate: chatMutate 
+    } = useChats();
 
-export default SideBarPage;
+    return (
+      <aside className="bg-custom-sidebar relative text-white p-2 pr-0 w-64 h-screen overflow-x-hidden">
+        <div className="absolute top-2 w-full">
+          <div style={{ width: "93%" }}>
+            <NewChatButton chatMutate={chatMutate}/>
+          </div>
+          <Link href="/api/auth/signin">Login</Link>
+        </div>
+        <div className="flex flex-col mt-20" style={{ height: "calc(100% - 140px)" }}>
+          <div className="overflow-y-scroll flex-1" style={{ paddingRight: "5px" }}>
+            <ChatHistory chats={chats} chatLoading={chatLoading} chatMutate={chatMutate}/>
+          </div>
+        </div>
+  
+        <div className="absolute bg-custom-sidebar bottom-4 w-50 py-0 h-20">
+          <div className="relative h-full">
+            <div className="flex items-center mx-auto border-b-2 mb-2 border-white/20 garis"></div>
+            <style jsx>{`
+              .garis {
+                width: 95%;
+              }
+            `}</style>
+            <AlgorithmSelect />
+            <SignOutButton />
+          </div>
+        </div>
+      </aside>
+    );
+  };
+  
+  export default SideBarPage;
+  

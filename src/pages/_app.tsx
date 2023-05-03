@@ -1,21 +1,37 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
+import axios from "axios";
 import { SessionProvider } from "next-auth/react";
-import SideBarPage from "@/components/sidebar/sidebar-page/sidebar-page";
-import ChatWindowPage from "@/components/chat-window/chat-window-page/chat-window-page";
+
+import { ChatProvider } from "@/context/chat-context";
+import { AlgoProvider } from "@/context/algo-context";
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
     <SessionProvider session={pageProps.session}>
-      <div className="bg-custom-chat_window min-h-screen flex flex-row">
-        {/* sidebar */}
-        <SideBarPage/>
-
-        {/* chat window */}
-        <ChatWindowPage/>
-      </div>
+      <ChatProvider>
+        <AlgoProvider>
+          <Component {...pageProps} />
+        </AlgoProvider>
+      </ChatProvider>
     </SessionProvider>
   );
 };
 
+
 export default App;
+
+
+// import "@/styles/globals.css";
+// import type { AppProps } from "next/app";
+// import { SessionProvider } from "next-auth/react";
+
+// export default function App({ Component, pageProps }: AppProps) {
+  
+  
+//   return (
+//     <SessionProvider session={pageProps.session}>
+//       <Component {...pageProps} />
+//     </SessionProvider>
+//   );
+// }
