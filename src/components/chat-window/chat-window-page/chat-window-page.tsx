@@ -26,17 +26,18 @@ const ChatWindowPage: React.FC = () => {
   };
 
   const addQuery = async () => {
-    const inputText = document.getElementById("inputText") as HTMLInputElement;
+    const query = inputField;
+    if (query === "") return;
     setInputField("");
 
     await axios.post("api/message/create", {
-      text: inputText.value,
+      text: query,
       chatId: currentChat,
     });
     messageMutate();
 
     const res = await axios.post("api/query", {
-      query: inputText.value,
+      query: query,
       method: "kmp",
       chatId: currentChat,
     });
