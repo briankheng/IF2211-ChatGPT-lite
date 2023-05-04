@@ -64,7 +64,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ key, sender, content }) =
 
         {/* content */}
         <div className=" ml-2">
-          <p className="text-gray-100">{message}</p>
+          <p className="text-gray-100 whitespace-pre-wrap">{message}</p>
         </div>
       </div>
     </div>

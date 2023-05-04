@@ -62,13 +62,12 @@ const askHandler = async (
   } else if (QnAs_with_percentage[0].similarityPercentage > 0.9) {
     return QnAs_with_percentage[0].answer;
   } else {
-    return `Pertanyaan tidak ditemukan di database!\nApakah maksud anda:\n${QnAs_with_percentage.slice(
+    return `Pertanyaan tidak ditemukan di database!\n\nApakah maksud anda:\n${QnAs_with_percentage.slice(
       0,
       Math.min(3, QnAs_with_percentage.length)
     )
       .map((QnA, index) => (index + 1).toString() + ". " + QnA.question + "?")
-      .join("\n")}
-            `;
+      .join("\n")}`;
   }
 };
 
