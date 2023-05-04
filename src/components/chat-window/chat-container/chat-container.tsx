@@ -17,7 +17,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ key, sender, content }) =
     return null;
   }
 
-  const { user: { image, email } } = session;
+  const { user: { image} } = session;
 
   const getChatColor = (email: string) => {
     if (email === "chatgpt@gmail.com") {
@@ -36,18 +36,19 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ key, sender, content }) =
   }
 
   return (
-    <div key={key} className={getChatColor(sender)}>
-      <div className={`relative ap-4 md:gap-6 md:max-w-2xl lg:max-w-xl xl:max-w-3xl p-4 md:py-6 flex lg:px-0 m-auto flex p-150 sm:p-8 md:p-12 lg:p-16 xl:p-20`}>
+    <div key={key} className={`${getChatColor(sender)} shadow shadow-2 border-b border-gray-900/50`}>
+      <div className={`relative flex ap-4 md:gap-6 md:max-w-2xl lg:max-w-xl xl:max-w-3xl p-4 md:py-6  m-auto p-150 sm:px-4 md:px-5 lg:px-6 xl:px-7`}>
         {/* profile photo */}
-        {getProfilePhoto(sender) ? (
-          <img src={getProfilePhoto(sender)} alt="Profile" className="h-6 w-6 rounded-full flex items-end" />
-        ) : (
-          <img src={image} alt="Profile Picture" className="w-6 h-6 rounded-full" />
-        )}
+
+          {getProfilePhoto(sender) ? (
+            <img src={getProfilePhoto(sender)} alt="Profile" className="h-9 w-9 rounded-full flex items-end" />
+          ) : (
+            <img src={image} alt="Profile Picture" className="w-9 h-9 rounded-full" />
+          )}
 
         {/* content */}
         <div className=" ml-2">
-          <p className="text-white">{content}</p>
+          <p className="text-gray-100">{content}</p>
         </div>
       </div>
     </div>
