@@ -21,7 +21,7 @@ const SideBarPage = () => {
             <NewChatButton chatMutate={chatMutate}/>
           </div>
         </div>
-        <div className="flex flex-col mt-10" style={{ height: "calc(100% - 140px)" }}>
+        <div className="flex flex-col mt-12 " style={{ height: "calc(100% - 140px)" }}>
           <div className="overflow-y-scroll flex-1" style={{ paddingRight: "5px" }}>
             <ChatHistory chats={chats} chatLoading={chatLoading} chatMutate={chatMutate}/>
           </div>
