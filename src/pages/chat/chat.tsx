@@ -23,6 +23,7 @@ const Chat = () => {
     chatMutate();
   };
 
+
   const setChat = () => {
     if (!chatLoading && chats) {
       if (currentChat === '' && chats.length>0){
@@ -32,13 +33,21 @@ const Chat = () => {
     }
   };
 
+  const isChatValid = (listOfChat: any, curChat:any) => {
+    listOfChat.map((chat: any) => {
+      if (chat.id.toString() === curChat){
+        return true;
+      }
+    });
+    return false;
+  }
 
   useEffect(() => {
     if (!chatLoading && chats) {
-      if (chats.length===0){
+      if (chats.length===0 || isChatValid(chats, currentChat)){
         newChat();
         setCurrentChat('');
-      }
+      } 
     }
   }, [chats]);
   

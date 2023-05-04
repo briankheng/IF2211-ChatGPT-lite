@@ -12,6 +12,7 @@ const InputBox: React.FC<InputBoxProps> = ({
   onMessageChange,
   onSendMessage,
 }) => {
+
   const [textAreaHeight, setTextAreaHeight] = useState("auto");
   const [isSendClicked, setIsSendClicked] = useState(false); // new state for checking send button click
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -29,6 +30,20 @@ const InputBox: React.FC<InputBoxProps> = ({
     onSendMessage();
     if (textAreaRef.current) {
       textAreaRef.current.style.height = minHeight; // set height to min height when send button clicked
+    }
+  };
+
+  const onEnterKeyPress = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      onSendMessage();
+    } else if (event.key === "Enter" && event.shiftKey) {
+      event.preventDefault();
+      onMessageChange({
+        target: {
+          value: message + "\n",
+        },
+      } as React.ChangeEvent<HTMLTextAreaElement>);
     }
   };
 
@@ -68,6 +83,7 @@ const InputBox: React.FC<InputBoxProps> = ({
           value={message}
           onChange={onMessageChange}
           onInput={onInput}
+          onKeyDown={onEnterKeyPress}
           ref={textAreaRef}
           id="inputText"
         />
