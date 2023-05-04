@@ -2,7 +2,7 @@ import AlgorithmSelect from "../algorithm-select/algorithm-select";
 import NewChatButton from "../new-chat-button/new-chat-button";
 import ChatHistory from "../chat-history/chat-history";
 import Link from "next/link";
-import SignOutButton from "../sign-out.tsx/sign-out";
+import AccountButton from "../sign-out.tsx/account";
 
 import useChats from "@/hooks/useChats";
 
@@ -36,7 +36,7 @@ const SideBarPage = () => {
               }
             `}</style>
             <AlgorithmSelect />
-            <SignOutButton />
+            <AccountButton />
           </div>
         </div>
       </aside>

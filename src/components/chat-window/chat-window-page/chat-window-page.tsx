@@ -98,7 +98,10 @@ const ChatWindowPage: React.FC = () => {
       </div>
 
       <div className="absolute w-full bottom-4 left-1/2 transform -translate-x-1/2">
-        <InputBox message={inputField} onMessageChange={handleMessageChange} onSendMessage={addQuery} />
+        <div className="mx-40 px-40">
+            <InputBox message={inputField} onMessageChange={handleMessageChange} onSendMessage={addQuery} />
+         
+        </div>
       </div>
     </main>
   );

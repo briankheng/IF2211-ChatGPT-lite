@@ -55,7 +55,7 @@ const HistoryContainer: React.FC<HistoryContainerProps> = ({
     setOnEdit(false);
   };
 
-  const isTitleOverflow = (el: HTMLParagraphElement) => {
+  const isTitleOverflow = (el: any) => {
     return el.scrollWidth > el.clientWidth;
   };
 

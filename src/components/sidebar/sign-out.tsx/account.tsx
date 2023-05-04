@@ -2,10 +2,10 @@ import { signOut, useSession, signIn } from "next-auth/react";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
-function SignOutButton() {
+function AccountButton() {
     const { data: session } = useSession();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const dropdownRef = useRef(null);
+    const dropdownRef:any = useRef(null);
 
     const handleSignOut = async () => {
         await signOut();
@@ -36,7 +36,7 @@ function SignOutButton() {
         return null;
     }
 
-    const { user: { image, email } } = session;
+    const { user: { image, email } }:any = session;
 
     return (
         <div className="relative">
@@ -103,4 +103,4 @@ function SignOutButton() {
     );
 }
 
-export default SignOutButton;
+export default AccountButton;

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import chatgptpicture from "../../../../public/chatgpt.svg";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
+
 
 interface ChatContainerProps {
   key: number;
@@ -67,7 +69,8 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
       >
         {/* profile photo */}
         {getProfilePhoto(sender) ? (
-          <img
+          
+          <Image
             src={getProfilePhoto(sender)}
             alt="Profile"
             className="h-9 w-9 rounded-full flex items-end"
@@ -77,7 +80,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
         ) : (
           <img
             src={image}
-            alt="Profile Picture"
+            alt="Profile photo"
             className="w-9 h-9 rounded-full"
             width={36}
             height={36}

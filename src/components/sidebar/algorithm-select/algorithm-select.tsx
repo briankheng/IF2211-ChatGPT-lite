@@ -6,7 +6,7 @@ import { AlgoContext } from "@/context/algo-context";
 const AlgorithmSelect = () => {
   const [selectedAlgorithm, setSelectedAlgorithm] = useState("Boyer Moore");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const dropdownRef:any = useRef(null);
 
   const {setCurrentAlgo} = useContext(AlgoContext);
   
