@@ -23,13 +23,8 @@ const HistoryContainer: React.FC<HistoryContainerProps> = ({ key, title, selecte
   };
 
   const delChat = async () => {
-    try {
-      await axios.delete("api/chat/delete", { data: { chatId: key } });
-      chatMutate();
-    } catch (error) {
-      console.log(error);
-      // Handle the error and show an appropriate message to the user
-    }
+    await axios.delete("api/chat/delete", { data: { chatId: title } });
+    chatMutate();
   };
 
   return (
