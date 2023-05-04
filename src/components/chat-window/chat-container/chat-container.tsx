@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { IMessage } from "../chat-window-page/chat-window-page";
 import { FaUserCircle } from 'react-icons/fa';
 import chatgptpicture from "../../../../public/chatgpt.svg";
@@ -10,7 +11,6 @@ interface ChatContainerProps {
 }
 
 const ChatContainer: React.FC<ChatContainerProps> = ({ key, sender, content }) => {
-  
   const { data: session } = useSession();
 
   if (!session) {
@@ -35,20 +35,36 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ key, sender, content }) =
     }
   }
 
+  const [message, setMessage] = useState(content);
+
+  useEffect(() => {
+    let timeoutId: number;
+    if (sender === "chatgpt@gmail.com") {
+      let i = 0;
+      timeoutId = window.setInterval(() => {
+        setMessage(content.slice(0, i + 1));
+        i++;
+        if (i === content.length) {
+          window.clearInterval(timeoutId);
+        }
+      }, 30);
+    }
+    return () => window.clearInterval(timeoutId);
+  }, [sender, content]);
+
   return (
     <div key={key} className={`${getChatColor(sender)} shadow shadow-2 border-b border-gray-900/50`}>
       <div className={`relative flex ap-4 md:gap-6 md:max-w-2xl lg:max-w-xl xl:max-w-3xl p-4 md:py-6  m-auto p-150 sm:px-4 md:px-5 lg:px-6 xl:px-7`}>
         {/* profile photo */}
-
-          {getProfilePhoto(sender) ? (
-            <img src={getProfilePhoto(sender)} alt="Profile" className="h-9 w-9 rounded-full flex items-end" />
-          ) : (
-            <img src={image} alt="Profile Picture" className="w-9 h-9 rounded-full" />
-          )}
+        {getProfilePhoto(sender) ? (
+          <img src={getProfilePhoto(sender)} alt="Profile" className="h-9 w-9 rounded-full flex items-end" />
+        ) : (
+          <img src={image} alt="Profile Picture" className="w-9 h-9 rounded-full" />
+        )}
 
         {/* content */}
         <div className=" ml-2">
-          <p className="text-gray-100">{content}</p>
+          <p className="text-gray-100">{message}</p>
         </div>
       </div>
     </div>
