@@ -20,6 +20,7 @@ const ChatWindowPage: React.FC = () => {
   const { currentChat } = useContext(ChatContext);
   const { currentAlgo } = useContext(AlgoContext);
   console.log("current algo: ", currentAlgo);
+  console.log("current chat window: ", currentChat);
 
   const handleMessageChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInputField(event.target.value);

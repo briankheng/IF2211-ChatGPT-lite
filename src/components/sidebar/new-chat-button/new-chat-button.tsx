@@ -1,15 +1,17 @@
 import axios from "axios";
 import useChats from "@/hooks/useChats";
-
+import { useContext } from "react";
+import { ChatContext } from "@/context/chat-context";
 interface NewChatButtonProps {
     chatMutate: any;
 }
 
 const NewChatButton: React.FC<NewChatButtonProps> = ({chatMutate}) => {
-
+    const {setCurrentChat } = useContext(ChatContext);
     const newChat = async () => {
         await axios.post("api/chat/create");
         chatMutate();
+        setCurrentChat('');
     };
 
     return (

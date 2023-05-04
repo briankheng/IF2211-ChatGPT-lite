@@ -13,8 +13,11 @@ export const ChatContext = createContext<IChatContext>({
 export const ChatProvider = ({ children }: { children: ReactNode }) => {
   const [currentChat, setCurrentChat] = useState<string>('');
 
-
   const value: IChatContext = { currentChat, setCurrentChat };
+  
+  useEffect(() => {
+    setCurrentChat(currentChat);
+  }, [currentChat]);
 
   return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;
 };
