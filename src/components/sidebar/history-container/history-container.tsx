@@ -55,6 +55,10 @@ const HistoryContainer: React.FC<HistoryContainerProps> = ({
     setOnEdit(false);
   };
 
+  const isTitleOverflow = (el: HTMLParagraphElement) => {
+    return el.scrollWidth > el.clientWidth;
+  };
+
   return (
     <div
       key={key}
@@ -71,25 +75,20 @@ const HistoryContainer: React.FC<HistoryContainerProps> = ({
         {/* title */}
         {!onEdit && (
           <div className="ml-2">
-            <p
-              className="text-white text-sm"
-              style={{
-                whiteSpace: "nowrap",
-                overflow: "hidden",
-                textOverflow: "gradient",
-                maxWidth: "15ch",
-                backgroundImage:
-                  "linear-gradient(to right, rgba(255,255,255,255), rgba(0,0,0,0))",
-                backgroundClip: "text",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                color: "transparent",
-                opacity: "1",
-              }}
-            >
-              {title}
-            </p>
-          </div>
+          <p
+            className={`text-white text-sm ${
+              isTitleOverflow(document.createElement("p").appendChild(document.createTextNode(title))) ? "bg-gradient-to-r from-white to-transparent" : ""
+            }`}
+            style={{
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              maxWidth: "18ch",
+            }}
+          >
+            {title}
+          </p>
+        </div>
         )}
 
         {/* edit chat */}
