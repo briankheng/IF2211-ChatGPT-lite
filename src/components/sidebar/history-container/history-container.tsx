@@ -13,7 +13,7 @@ interface HistoryContainerProps {
 
 const HistoryContainer: React.FC<HistoryContainerProps> = ({ key, title, selected, onHandleSelect, chatMutate }) => {
   console.log("cur key: ", { title });
-
+  
   const isClicked = (tempKey: string) => {
     if (tempKey === selected) {
       return "bg-custom-chat_window";
@@ -21,7 +21,8 @@ const HistoryContainer: React.FC<HistoryContainerProps> = ({ key, title, selecte
       return "bg-none";
     }
   };
-
+  
+  
   const delChat = async () => {
     await axios.delete("api/chat/delete", { data: { chatId: title } });
     chatMutate();
