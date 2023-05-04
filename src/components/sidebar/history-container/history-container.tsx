@@ -23,7 +23,7 @@ const HistoryContainer: React.FC<HistoryContainerProps> = ({ key, title, selecte
   };
 
   const delChat = async () => {
-    await axios.delete("api/chat/delete", { data: { chatId: key } });
+    await axios.delete("api/chat/delete", { data: { chatId: title } });
     chatMutate();
   };
 
