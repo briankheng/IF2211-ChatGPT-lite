@@ -8,16 +8,13 @@ const Home = () => {
 
   return (
     <div>
-      {!session && (
-        <HomePage/>
-      )}
-      <Chat/>
+      {!session && <HomePage />}
+      {session && <Chat />}
     </div>
   );
-}
+};
 
 export default Home;
-
 
 // import axios from "axios";
 // import { signOut } from "next-auth/react";
@@ -48,10 +45,10 @@ export default Home;
 //     messageMutate();
 //   };
 
-//   const { 
-//     chats, 
-//     isLoading: chatLoading, 
-//     mutate: chatMutate 
+//   const {
+//     chats,
+//     isLoading: chatLoading,
+//     mutate: chatMutate
 //   } = useChats();
 
 //   const {
@@ -68,7 +65,6 @@ export default Home;
 //       <button onClick={addQuery}>add query</button>
 //       <button onClick={() => signOut()}>signout</button>
 
-
 //       {!chatLoading && chats && (
 //         <div className="bg-midnight">
 //           {chats.map((chat: any) => (
@@ -79,7 +75,7 @@ export default Home;
 //           ))}
 //         </div>
 //       )}
-      
+
 //       {!messageLoading && messages && (
 //         <div className="bg-midnight">
 //           {messages.map((message: any) => (
