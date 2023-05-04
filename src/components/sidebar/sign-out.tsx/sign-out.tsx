@@ -1,4 +1,4 @@
-import { signOut, useSession } from "next-auth/react";
+import { signOut, useSession, signIn } from "next-auth/react";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
@@ -69,11 +69,11 @@ function SignOutButton() {
                         Sign Out
                     </div>
                     <div className="flex items-center mx-auto border-b-2 border-white/5"></div>
-                    <Link href="/api/auth/signin">
-                        <div className="py-2 px-4 text-sm cursor-default hover:bg-gray-700 dropdown" onClick={handleChangeAccount}>
-                            Change Account
-                        </div>
-                    </Link>
+
+                    <div className="py-2 px-4 text-sm cursor-default hover:bg-gray-700 dropdown" onClick={() => signIn("google")}>
+                        Change Account
+                    </div>
+
                 </div>
                 </div>
             )}
