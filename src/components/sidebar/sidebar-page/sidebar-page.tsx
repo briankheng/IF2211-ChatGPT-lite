@@ -17,7 +17,7 @@ const SideBarPage = () => {
     return (
       <aside className="bg-custom-sidebar relative text-white p-2 pr-0 w-64 h-screen overflow-x-hidden">
         <div className="absolute top-2 w-full">
-          <div style={{ width: "93%" }}>
+          <div style={{ width: "92%" }}>
             <NewChatButton chatMutate={chatMutate}/>
           </div>
         </div>
