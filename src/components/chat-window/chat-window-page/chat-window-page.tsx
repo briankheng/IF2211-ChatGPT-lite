@@ -39,7 +39,7 @@ const ChatWindowPage: React.FC = () => {
 
     const res = await axios.post("api/query", {
       query: query,
-      method: "kmp",
+      method: currentAlgo,
       chatId: currentChat,
     });
     messageMutate();
@@ -97,10 +97,9 @@ const ChatWindowPage: React.FC = () => {
         </div>
       </div>
 
-      <div className="absolute w-full bottom-4 left-1/2 transform -translate-x-1/2">
-        <div className="mx-40 px-40">
+      <div className="absolute w-full bottom-4">
+        <div className="mx-10 xl:mx-40 px-40">
             <InputBox message={inputField} onMessageChange={handleMessageChange} onSendMessage={addQuery} />
-         
         </div>
       </div>
     </main>

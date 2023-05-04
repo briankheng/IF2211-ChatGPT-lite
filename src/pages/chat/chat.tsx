@@ -50,11 +50,6 @@ const Chat = () => {
       } 
     }
   }, [chats]);
-  
-  useEffect(() => {
-    console.log("masuk useffect");
-    setCurrentAlgo("bm");
-  }, []);
 
   setChat();
 
