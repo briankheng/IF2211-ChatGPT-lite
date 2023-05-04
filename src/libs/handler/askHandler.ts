@@ -33,7 +33,7 @@ const askHandler = async (
   const QnAs = [...userQnA, ...globalQnA];
   const QnAs_with_percentage: QnAWithPercentage[] = [];
 
-  let answer: string | undefined;
+  const answer: string[] = [];
 
   QnAs.forEach((QnA) => {
     const exactMatching =
@@ -42,33 +42,32 @@ const askHandler = async (
         : bm(QnA.question, question);
 
     if (exactMatching) {
-      answer = QnA.answer;
-    } else {
-      const similarityPercentage = similarityCheck(QnA.question, question);
-      QnAs_with_percentage.push({
-        ...QnA,
-        similarityPercentage,
-      });
+      answer.push(QnA.answer);
     }
+
+    const similarityPercentage = similarityCheck(QnA.question, question);
+    QnAs_with_percentage.push({
+      ...QnA,
+      similarityPercentage,
+    });
   });
 
   QnAs_with_percentage.sort(
     (a, b) => b.similarityPercentage - a.similarityPercentage
   );
 
-  if (answer) return answer;
+  if (answer.length == 1) return answer[0];
   else if (QnAs_with_percentage.length === 0) {
     return `Pertanyaan tidak ditemukan di database!`;
   } else if (QnAs_with_percentage[0].similarityPercentage > 0.9) {
     return QnAs_with_percentage[0].answer;
   } else {
-    return `Pertanyaan tidak ditemukan di database!\nApakah maksud anda:\n${QnAs_with_percentage.slice(
+    return `Pertanyaan tidak ditemukan di database!\n\nApakah maksud anda:\n${QnAs_with_percentage.slice(
       0,
       Math.min(3, QnAs_with_percentage.length)
     )
       .map((QnA, index) => (index + 1).toString() + ". " + QnA.question + "?")
-      .join("\n")}
-            `;
+      .join("\n")}`;
   }
 };
 
