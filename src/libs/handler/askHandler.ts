@@ -18,6 +18,7 @@ const askHandler = async (
   method: string,
   session: any
 ): Promise<string> => {
+  const originalQuestion = question;
   question = textCleaner(question);
 
   const userQnA = await prisma.qnA.findMany({
@@ -39,14 +40,14 @@ const askHandler = async (
   QnAs.forEach((QnA) => {
     const exactMatching =
       method === "kmp"
-        ? kmp(QnA.question, question)
-        : bm(QnA.question, question);
+        ? (kmp(QnA.question, question) || kmp(QnA.question, originalQuestion))
+        : (bm(QnA.question, question) || bm(QnA.question, originalQuestion));
 
     if (exactMatching) {
       answer.push(QnA.answer);
     }
 
-    const similarityPercentage = similarityCheck(QnA.question, question);
+    const similarityPercentage = Math.max(similarityCheck(QnA.question, question), similarityCheck(QnA.question, originalQuestion));
     QnAs_with_percentage.push({
       ...QnA,
       similarityPercentage,
