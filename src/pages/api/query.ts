@@ -21,7 +21,7 @@ export default async function handler(
   if (!session) return res.status(401).end();
 
   try {
-    const queries: string[] = query.split(",");
+    const queries: string[] = query.split(',');
     const responses: string[] = [];
 
     for (let i = 0; i < queries.length; i++) {
