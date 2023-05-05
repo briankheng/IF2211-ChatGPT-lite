@@ -74,7 +74,7 @@ const InputBox: React.FC<InputBoxProps> = ({
   }, [isSendClicked]);
 
   return (
-    <div className="bg-custom-input_box relative flex border border-gray-900/50 shadow-[0_0_15px_rgba(0,0,0,0.10)] justify-between rounded-md items-center mx-4 my-4 r p-2 pl-4 place xl:mx-40">
+    <div className="bg-custom-input_box relative flex border border-gray-900/50 shadow-[0_0_15px_rgba(0,0,0,0.10)] justify-between rounded-md items-center mx-auto my-4 r p-2 pl-4 place sm:mx-10 md:mx-10 xl:mx-5">
       <div className="flex w-full items-center ">
         <textarea
           className="kotak bg-custom-input_box flex-1 focus:outline-none text-white resize-none mr-5 overflow-auto scrollbar-thin scrollbar-thumb-transparent scrollbar-track-transparent h-full"
