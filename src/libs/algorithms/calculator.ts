@@ -3,7 +3,7 @@ const calculator = (str: string): string => {
   const equation = str.match(/([\d+\-*/()^]+)/);
   try {
     const res = eval(equation![0].split("^").join("**"));
-    return `${equation![0].split("").join(" ")} = ${res}`;
+    return `${equation![0]} = ${res}`;
   } catch (e) {
     return "Sintaks persamaan tidak sesuai!";
   }
