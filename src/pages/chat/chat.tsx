@@ -21,6 +21,7 @@ const Chat = () => {
   const newChat = async () => {
     await axios.post("api/chat/create");
     chatMutate();
+    console.log("masuk new chat");
   };
 
 
@@ -34,7 +35,10 @@ const Chat = () => {
   };
 
   const isChatValid = (listOfChat: any, curChat:any) => {
+    console.log("masuk validasi, curchat : ", curChat);
     listOfChat.map((chat: any) => {
+      console.log("chat id: ", chat.id.toString());
+      console.log("curChat: ", curChat);
       if (chat.id.toString() === curChat){
         return true;
       }
@@ -44,9 +48,11 @@ const Chat = () => {
 
   useEffect(() => {
     if (!chatLoading && chats) {
-      if (chats.length===0 || isChatValid(chats, currentChat)){
+      console.log("isi validasi", isChatValid(chats, currentChat));
+      if (chats.length===0){
         newChat();
-        setCurrentChat('');
+        setCurrentChat(''); 
+        chatMutate();
       } 
     }
   }, [chats]);
