@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import chatgptpicture from "../../../../public/chatgpt.svg";
 import { useSession } from "next-auth/react";
+import ReactTypingEffect from "react-typing-effect";
 import Image from "next/image";
 
 
