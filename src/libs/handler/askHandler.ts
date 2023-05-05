@@ -2,6 +2,7 @@ import textCleaner from "../algorithms/textCleaner";
 import kmp from "../algorithms/string-matching/kmp";
 import bm from "../algorithms/string-matching/bm";
 import similarityCheck from "../algorithms/string-matching/similarityCheck";
+import prisma from "@/libs/prisma";
 
 type QnA = {
   id: string;
