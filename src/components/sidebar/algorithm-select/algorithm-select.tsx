@@ -6,16 +6,16 @@ import { AlgoContext } from "@/context/algo-context";
 const AlgorithmSelect = () => {
   const [selectedAlgorithm, setSelectedAlgorithm] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef:any = useRef(null);
+  const dropdownRef: any = useRef(null);
 
-  const {setCurrentAlgo} = useContext(AlgoContext);
+  const { setCurrentAlgo } = useContext(AlgoContext);
 
   useEffect(() => {
     setSelectedAlgorithm("Knuth-Morris-Pratt");
   }, []);
 
   const handleAlgorithmChange = (e: any) => {
-    if(e.target.value === "kmp") {
+    if (e.target.value === "kmp") {
       setSelectedAlgorithm("Knuth-Morris-Pratt");
       setCurrentAlgo("kmp");
     } else {
@@ -118,8 +118,8 @@ const AlgorithmSelect = () => {
         .dropdownbutton:hover {
           background-color: #343541;
         }
-        .pembatas{
-            border-bottom: 1px solid #ffffff;
+        .pembatas {
+          border-bottom: 1px solid #ffffff;
         }
       `}</style>
     </div>

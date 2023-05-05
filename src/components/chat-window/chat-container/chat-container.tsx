@@ -48,12 +48,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
   };
 
   return (
-    <div
-      key={key}
-      className={`${getChatColor(
-        sender
-      )} shadow shadow-3  `}
-    >
+    <div key={key} className={`${getChatColor(sender)} shadow shadow-3  `}>
       <div
         className={`relative flex ap-4 md:gap-6 md:max-w-2xl lg:max-w-xl xl:max-w-3xl p-4 md:py-6  m-auto p-150 sm:px-4 md:px-5 lg:px-6 xl:px-7`}
       >
@@ -82,7 +77,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
               }}
             />
           ) : (
-            <p style={{maxWidth : "81ch"}}>{content}</p>
+            <p style={{ maxWidth: "81ch" }}>{content}</p>
           )}
         </div>
       </div>
