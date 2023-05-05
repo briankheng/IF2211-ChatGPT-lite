@@ -162,7 +162,7 @@ Sebuah aplkasi CHatGPT sederhana yang dengan mengaplikasikan pendekatan QA yang 
 <a name="project-status">
 
 ## Project Status
-Project is: _ongoing_
+Project is: _complete_
 
 <a name="room-for-improvement">
 
