@@ -1,7 +1,6 @@
 import AlgorithmSelect from "../algorithm-select/algorithm-select";
 import NewChatButton from "../new-chat-button/new-chat-button";
 import ChatHistory from "../chat-history/chat-history";
-import Link from "next/link";
 import AccountButton from "../account-select/account";
 
 import useChats from "@/hooks/useChats";
@@ -16,9 +15,19 @@ const SideBarPage = () => {
           <NewChatButton chatMutate={chatMutate} />
         </div>
       </div>
-      <div className="flex flex-col mt-12 " style={{ height: "calc(100% - 140px)" }}>
-        <div className="overflow-y-scroll flex-1" style={{ paddingRight: "5px" }}>
-          <ChatHistory chats={chats} chatLoading={chatLoading} chatMutate={chatMutate} />
+      <div
+        className="flex flex-col mt-12 "
+        style={{ height: "calc(100% - 140px)" }}
+      >
+        <div
+          className="overflow-y-scroll flex-1"
+          style={{ paddingRight: "5px" }}
+        >
+          <ChatHistory
+            chats={chats}
+            chatLoading={chatLoading}
+            chatMutate={chatMutate}
+          />
         </div>
       </div>
 

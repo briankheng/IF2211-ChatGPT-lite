@@ -28,7 +28,7 @@ const HistoryContainer: React.FC<HistoryContainerProps> = ({
   const [onEdit, setOnEdit] = useState<boolean>(false);
   const [editTitle, setEditTitle] = useState<string>(title);
 
-  const {setCurrentChat} = useContext(ChatContext);
+  const { setCurrentChat } = useContext(ChatContext);
 
   const isClicked = (tempKey: string) => {
     if (tempKey === selected) {
@@ -37,17 +37,17 @@ const HistoryContainer: React.FC<HistoryContainerProps> = ({
       return "bg-none";
     }
   };
-  
+
   const newChat = async () => {
     await axios.post("api/chat/create");
     chatMutate();
   };
-  
+
   const delChat = async () => {
     await axios.delete("api/chat/delete", { data: { chatId: id } });
     chatMutate();
     newChat();
-    setCurrentChat('');
+    setCurrentChat("");
   };
 
   const editChat = () => {
@@ -55,7 +55,7 @@ const HistoryContainer: React.FC<HistoryContainerProps> = ({
   };
 
   const confirmEdit = async () => {
-    await axios.put("api/chat/update", {chatId: id, title: editTitle});
+    await axios.put("api/chat/update", { chatId: id, title: editTitle });
     chatMutate();
     setOnEdit(false);
   };
@@ -85,20 +85,26 @@ const HistoryContainer: React.FC<HistoryContainerProps> = ({
         {/* title */}
         {!onEdit && (
           <div className="ml-2">
-          <p
-            className={`text-white text-sm ${
-              isTitleOverflow(document.createElement("p").appendChild(document.createTextNode(title))) ? "bg-gradient-to-r from-white to-transparent" : ""
-            }`}
-            style={{
-              whiteSpace: "nowrap",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              maxWidth: "18ch",
-            }}
-          >
-            {title}
-          </p>
-        </div>
+            <p
+              className={`text-white text-sm ${
+                isTitleOverflow(
+                  document
+                    .createElement("p")
+                    .appendChild(document.createTextNode(title))
+                )
+                  ? "bg-gradient-to-r from-white to-transparent"
+                  : ""
+              }`}
+              style={{
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                maxWidth: "18ch",
+              }}
+            >
+              {title}
+            </p>
+          </div>
         )}
 
         {/* edit chat */}

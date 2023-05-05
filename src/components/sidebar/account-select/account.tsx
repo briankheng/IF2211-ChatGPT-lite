@@ -1,4 +1,4 @@
-import { signOut, useSession, signIn } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useState, useEffect, useRef } from "react";
 import dummypicture from "../../../../public/dummy-profile.svg";
 
