@@ -53,7 +53,7 @@ const ChatWindowPage: React.FC = () => {
   {!messageLoading && messages && (
     <div className="bg-none shadow rounded-lg overflow-y-scroll h-full">
       {messages.map((msg: any) => (
-        <ChatContainer key={msg.id} sender={msg.user.email} content={msg.text} />
+        <ChatContainer key={msg.id} sender={msg.user.email} content={msg.text} createdAt={msg.createdAt} />
       ))}
       {messages.length === 0 && (
         <div className="container mx-auto mt-5 px-4 flex flex-col items-center justify-center intro h-full">

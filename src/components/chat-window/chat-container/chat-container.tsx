@@ -1,42 +1,31 @@
-import { useEffect, useState } from "react";
 import chatgptpicture from "../../../../public/chatgpt.svg";
+import dummypicture from "../../../../public/dummy-profile.svg";
 import { useSession } from "next-auth/react";
-import ReactTypingEffect from "react-typing-effect";
-import Image from "next/image";
-
+import Typewriter from "typewriter-effect";
 
 interface ChatContainerProps {
   key: number;
   sender: string;
   content: string;
+  createdAt: string;
 }
 
 const ChatContainer: React.FC<ChatContainerProps> = ({
   key,
   sender,
   content,
+  createdAt,
 }) => {
   const { data: session } = useSession();
-  const [message, setMessage] = useState(content);
-
-  useEffect(() => {
-    let timeoutId: number;
-    if (sender === "chatgpt@gmail.com") {
-      let i = 0;
-      timeoutId = window.setInterval(() => {
-        setMessage(content.slice(0, i + 1));
-        i++;
-        if (i === content.length) {
-          window.clearInterval(timeoutId);
-        }
-      }, 30);
-    }
-    return () => window.clearInterval(timeoutId);
-  }, [sender, content]);
 
   if (!session) {
     return null;
   }
+
+  const currentDateTime = new Date();
+  const messageDateTime = new Date(createdAt);
+  const timeDiff =
+    (currentDateTime.getTime() - messageDateTime.getTime()) / 1000;
 
   const {
     user: { image },
@@ -54,7 +43,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
     if (email === "chatgpt@gmail.com") {
       return chatgptpicture.src;
     } else {
-      return ""; // fallback to default user icon if email is not "chatgpt@gmail.com"
+      return image;
     }
   };
 
@@ -70,27 +59,31 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
       >
         {/* profile photo */}
         {getProfilePhoto(sender) ? (
-          
-          <Image
+          <img
             src={getProfilePhoto(sender)}
             alt="Profile"
             className="h-9 w-9 rounded-full flex items-end"
-            width={36}
-            height={36}
           />
         ) : (
           <img
-            src={image}
+            src={dummypicture.src}
             alt="Profile photo"
             className="w-9 h-9 rounded-full"
-            width={36}
-            height={36}
           />
         )}
 
         {/* content */}
-        <div className=" ml-2">
-          <p className="text-gray-100 whitespace-pre-wrap">{message}</p>
+        <div className=" ml-2 text-gray-100 whitespace-pre-wrap">
+          {sender === "chatgpt@gmail.com" && timeDiff < 1 ? (
+            <Typewriter
+              options={{ loop: false, delay: 20 }}
+              onInit={(typewriter) => {
+                typewriter.typeString(content).start();
+              }}
+            />
+          ) : (
+            <p>{content}</p>
+          )}
         </div>
       </div>
     </div>
