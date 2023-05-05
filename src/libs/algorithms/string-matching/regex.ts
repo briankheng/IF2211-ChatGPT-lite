@@ -2,7 +2,7 @@ const regex = (str: string): string => {
   str = str.toLowerCase();
 
   if (
-    str.match(/^.*(0[1-9]|[1-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/([1-2][0-9]{3}).*$/) !== null) {
+    str.match(/^.*(\d{2}\/\d{2}\/\d{4}).*$/) !== null) {
     return "date";
   } else if (
     str.match(/^.*[0-9]+\s*[\+\-\*\^\/\(\)]\s*[0-9\+\-\*\^\/\(\)\s]*.*$/) !== null) {
