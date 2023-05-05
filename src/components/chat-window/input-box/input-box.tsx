@@ -37,6 +37,9 @@ const InputBox: React.FC<InputBoxProps> = ({
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
       onSendMessage();
+      if (textAreaRef.current) {
+        textAreaRef.current.style.height = minHeight; // set height to min height when send button clicked
+      }
     } else if (event.key === "Enter" && event.shiftKey) {
       event.preventDefault();
       onMessageChange({
