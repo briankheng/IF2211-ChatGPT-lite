@@ -1,4 +1,6 @@
 const bm = (text: string, pattern: string): boolean => {
+  if(pattern.length === 0) return true;
+  
   const lastOccurrence = lastOccurrenceFunction(pattern);
   let i = pattern.length - 1;
   let j = pattern.length - 1;
