@@ -57,8 +57,9 @@ const askHandler = async (
     (a, b) => b.similarityPercentage - a.similarityPercentage
   );
 
-  if (answer.length == 1) return answer[0];
-  else if (QnAs_with_percentage.length === 0) {
+  if (answer.length == 1) {
+    return answer[0];
+  } else if (QnAs_with_percentage.length === 0) {
     return `Pertanyaan tidak ditemukan di database!`;
   } else if (QnAs_with_percentage[0].similarityPercentage > 0.9) {
     return QnAs_with_percentage[0].answer;
@@ -67,7 +68,7 @@ const askHandler = async (
       0,
       Math.min(3, QnAs_with_percentage.length)
     )
-      .map((QnA, index) => (index + 1).toString() + ". " + QnA.question + "?")
+      .map((QnA) => "    - " + QnA.question + "?")
       .join("\n")}`;
   }
 };
