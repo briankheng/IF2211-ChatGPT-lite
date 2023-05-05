@@ -122,127 +122,41 @@ Sebuah aplkasi CHatGPT sederhana yang dengan mengaplikasikan pendekatan QA yang 
 
 ## Structure
 ```bash
-│   .env
-│   .eslintrc.json
-│   .gitignore
-│   global.d.ts
-│   next-env.d.ts
-│   next.config.js
-│   package-lock.json
-│   package.json
-│   postcss.config.js
-│   README.md
-│   tailwind.config.js
-│   tsconfig.json
-│
 ├───.next
+├───doc
+├───img
 ├───node_modules
 ├───prisma
-│       schema.prisma
-│
 ├───public
-│       chatgpt.svg
-│       favicon.ico
-│       next.svg
-│       thirteen.svg
-│       vercel.svg
-│
 └───src
     ├───assets
-    │       chatIcon.tsx
-    │       deleteIcon.tsx
-    │       editIcon.tsx
-    │       sendIcon.tsx
-    │
     ├───components
     │   ├───chat-window
     │   │   ├───chat-container
-    │   │   │       chat-container.tsx
-    │   │   │
     │   │   ├───chat-window-page
-    │   │   │       chat-window-page.tsx
-    │   │   │
     │   │   ├───input-box
-    │   │   │       input-box.tsx
-    │   │   │
     │   │   └───send-button
-    │   │           send-button.tsx
-    │   │
     │   └───sidebar
+    │       ├───account-select
     │       ├───algorithm-select
-    │       │       algorithm-select.tsx
-    │       │
     │       ├───chat-history
-    │       │       chat-history.tsx
-    │       │
     │       ├───history-container
-    │       │       history-container.tsx
-    │       │
     │       ├───new-chat-button
-    │       │       new-chat-button.tsx
-    │       │
-    │       ├───sidebar-page
-    │       │       sidebar-page.tsx
-    │       │
-    │       └───sign-out.tsx
-    │               sign-out.tsx
-    │
+    │       └───sidebar-page
     ├───context
-    │       algo-context.tsx
-    │       chat-context.tsx
-    │
     ├───hooks
-    │       useChats.ts
-    │       useMessages.ts
-    │
     ├───libs
-    │   │   fetcher.ts
-    │   │   prisma.ts
-    │   │
     │   ├───algorithms
-    │   │   │   calculator.ts
-    │   │   │   date.ts
-    │   │   │   textCleaner.ts
-    │   │   │
     │   │   └───string-matching
-    │   │           bm.ts
-    │   │           kmp.ts
-    │   │           levenshteinDistance.ts
-    │   │           regex.ts
-    │   │           similarityCheck.ts
-    │   │
     │   └───handler
-    │           addHandler.ts
-    │           askHandler.ts
-    │           deleteHandler.ts
-    │
     ├───pages
-    │   │   index.tsx
-    │   │   _app.tsx
-    │   │
     │   ├───api
-    │   │   │   query.ts
-    │   │   │
     │   │   ├───auth
-    │   │   │       [...nextauth].ts
-    │   │   │
     │   │   ├───chat
-    │   │   │       create.ts
-    │   │   │       delete.ts
-    │   │   │       read.ts
-    │   │   │
     │   │   └───message
-    │   │           create.ts
-    │   │           [id].ts
-    │   │
     │   ├───chat
-    │   │       chat.tsx
-    │   │
     │   └───home
-    │           home.tsx
-    │
     └───styles
-            globals.css
 ```
 
 <a name="project-status">
