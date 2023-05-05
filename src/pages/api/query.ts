@@ -7,6 +7,7 @@ import calculator from "@/libs/algorithms/calculator";
 import addHandler from "@/libs/handler/addHandler";
 import deleteHandler from "@/libs/handler/deleteHandler";
 import askHandler from "@/libs/handler/askHandler";
+import prisma from "@/libs/prisma";
 
 export default async function handler(
   req: NextApiRequest,
