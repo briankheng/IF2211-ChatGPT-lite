@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useState, useEffect, ReactNode } from "react";
 
 interface IAlgoContext {
   setCurrentAlgo: React.Dispatch<React.SetStateAction<string>>;
@@ -7,11 +7,11 @@ interface IAlgoContext {
 
 export const AlgoContext = createContext<IAlgoContext>({
   setCurrentAlgo: () => null,
-  currentAlgo: '',
+  currentAlgo: "",
 });
 
 export const AlgoProvider = ({ children }: { children: ReactNode }) => {
-  const [currentAlgo, setCurrentAlgo] = useState<string>('');
+  const [currentAlgo, setCurrentAlgo] = useState<string>("");
 
   const value: IAlgoContext = { currentAlgo, setCurrentAlgo };
 

@@ -12,7 +12,6 @@ const InputBox: React.FC<InputBoxProps> = ({
   onMessageChange,
   onSendMessage,
 }) => {
-
   const [textAreaHeight, setTextAreaHeight] = useState("auto");
   const [isSendClicked, setIsSendClicked] = useState(false); // new state for checking send button click
   const textAreaRef = useRef<HTMLTextAreaElement>(null);

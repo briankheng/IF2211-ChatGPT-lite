@@ -1,6 +1,6 @@
 # Tubes3_13521049
 <h2 align="center">
-   <a href="https://tucil-3-g7s9.vercel.app/" target="_blank">📨 ChatGPT-lite 📨</a>
+   <a href="https://chatgpt-lite-alpha.vercel.app/" target="_blank">📨 ChatGPT-lite 📨</a>
 </h2>
 <hr>
 
@@ -73,48 +73,50 @@ Sebuah aplkasi CHatGPT sederhana yang dengan mengaplikasikan pendekatan QA yang 
    npm run dev
    ```
 5. Buka [http://localhost:3000](http://localhost:3000) pada Browser Anda
-6. Cara alternatif dapat melalui pranala [berikut](https://tucil-3-g7s9.vercel.app/)
+6. Cara alternatif dapat melalui pranala [berikut](https://chatgpt-lite-alpha.vercel.app/)
 
 <a name="usage"></a>
 
 ## Usage
-1. Open the project in Visual Studio
-2. To open to the project, you can use the following steps:
-    - Click `File` in the top left corner
-    - Click `Open` > `Project/Solution`
-    - Navigate to the directory where you clone this repository
-    - Go to `Tubes2_dicarryVieridanZaki/src/TreasureHunterApp` folder
-    - Click `TreasureHunterApp.csproj`
-3. After the project was opened:
-    - right click on `TreasureHunterApp` in the `Solution Explorer` on the left side of the screen
-    - Choose `Publish`
-    - Browse the directory where you want to save the executable file
-    - Click `Finish`
-    - The executable file will be saved in the directory that you choose
-    - You can run the executable file by double clicking `setup.exe`
-    - And then click `install` to install the program
+1. Tekan tombol `Login` pada landing page untuk masuk ke aplikasi
+2. Pilih algoritma yang akan digunakan untuk mencari string dengan kemiripan tertinggi
+3. Masukkan pertanyaan pada chatbox dan tekan tombol `Enter` atau `icon send` untuk mengirimkan pertanyaan
+4. Apabila ingin menambah chat baru, tekan tombol `New Chat` pada sidebar
+5. Jika ingin mengubah title dari room chat, tekan `icon edit Title` pada sidebar
+6. Jika ingin menghapus room chat, tekan `icon delete` pada sidebar
+7. Tombol yang bertuliskan `email` pada sidebar digunakan untuk `Sign Out / Change Account`
+
 
 <a name="videocapture"></a>
 
 ## Video Capture
 <nl>
 
-<!-- ![ChatGPT Gif](https://github.com/rifqifarhansyah/Tubes2_dicarryVieridanZaki/blob/main/img/TreasureHunter.gif?raw=true) -->
+![ChatGPT Gif](https://github.com/briankheng/Tubes3_13521049/blob/frontend/img/ChatGPTLite.gif?raw=true)
 
 <a name="screenshots"></a>
 
 ## Screenshots
-<!-- <p>
+<p>
+  <p>Gambar 1. Landing Page</p>
   <img src="/img/SS1.png/">
-  <p>Figure 1. Config File (*txt)</p>
   <nl>
+  <p>Gambar 2. Window Utama</p>
   <img src="/img/SS2.png/">
-  <p>Figure 2. Initial Appearance of the Program</p>
   <nl>
+  <p>Gambar 3. Chat Window</p>
   <img src="/img/SS3.png/">
-  <p>Figure 3. Result</p>
   <nl>
-</p> -->
+   <p>Gambar 4. Edit Title</p>
+   <img src="/img/SS4.png/">
+   <nl>
+   <p>Gambar 5. Algorithm Select</p>
+   <img src="/img/SS5.png/">
+   <nl>
+   <p>Gambar 6. Sign Out / Change Account</p>
+   <img src="/img/SS6.png/">
+   <nl>
+</p>
 
 <a name="structure"></a>
 

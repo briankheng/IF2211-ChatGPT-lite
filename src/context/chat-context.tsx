@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useState, useEffect, ReactNode } from "react";
 
 interface IChatContext {
   setCurrentChat: React.Dispatch<React.SetStateAction<string>>;
@@ -7,14 +7,14 @@ interface IChatContext {
 
 export const ChatContext = createContext<IChatContext>({
   setCurrentChat: () => null,
-  currentChat: '',
+  currentChat: "",
 });
 
 export const ChatProvider = ({ children }: { children: ReactNode }) => {
-  const [currentChat, setCurrentChat] = useState<string>('');
+  const [currentChat, setCurrentChat] = useState<string>("");
 
   const value: IChatContext = { currentChat, setCurrentChat };
-  
+
   useEffect(() => {
     setCurrentChat(currentChat);
   }, [currentChat]);
