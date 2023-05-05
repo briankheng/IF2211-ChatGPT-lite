@@ -55,7 +55,7 @@ const HistoryContainer: React.FC<HistoryContainerProps> = ({
   };
 
   const confirmEdit = async () => {
-    await axios.put("api/chat/update", { data: {chatId: id, title: editTitle} });
+    await axios.put("api/chat/update", {chatId: id, title: editTitle});
     chatMutate();
     setOnEdit(false);
   };
