@@ -74,7 +74,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
 
         {/* content */}
         <div className=" ml-2 text-gray-100 whitespace-pre-wrap">
-          {sender === "chatgpt@gmail.com" && timeDiff < 1 ? (
+          {sender === "chatgpt@gmail.com" && timeDiff < 10 ? (
             <Typewriter
               options={{ loop: false, delay: 20 }}
               onInit={(typewriter) => {

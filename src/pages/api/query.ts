@@ -21,40 +21,56 @@ export default async function handler(
   if (!session) return res.status(401).end();
 
   try {
-    const classification = regex(query);
-    let response = "";
+    const queries: string[] = query.split(',');
+    const responses: string[] = [];
 
-    switch (classification) {
-      case "date":
-        response = date(query);
-        break;
-      case "calculator":
-        response = calculator(query);
-        break;
-      case "add":
-        response = await addHandler(query, session);
-        break;
-      case "delete":
-        response = await deleteHandler(query, session);
-        break;
-      case "ask":
-        response = await askHandler(query, method, session);
-        break;
+    for (let i = 0; i < queries.length; i++) {
+      const classification = regex(queries[i]);
+      let response = "";
 
-      default:
-        response = "Maaf, saya tidak mengerti pertanyaan Anda.";
-        break;
+      switch (classification) {
+        case "date":
+          response = date(queries[i]);
+          break;
+        case "calculator":
+          response = calculator(queries[i]);
+          break;
+        case "add":
+          response = await addHandler(queries[i], session);
+          break;
+        case "delete":
+          response = await deleteHandler(queries[i], session);
+          break;
+        case "ask":
+          response = await askHandler(queries[i], method, session);
+          break;
+
+        default:
+          response = "Maaf, saya tidak mengerti pertanyaan Anda.";
+          break;
+      }
+
+      responses.push(response);
+    }
+
+    let finalResponse: string = "";
+    if (responses.length == 1) {
+      finalResponse = responses[0];
+    } else {
+      finalResponse = `${responses
+        .map((response, index) => (index + 1).toString() + ". " + response)
+        .join("\n\n")}`;
     }
 
     await prisma.message.create({
       data: {
-        text: response,
+        text: finalResponse,
         user: { connect: { email: "chatgpt@gmail.com" } },
         chat: { connect: { id: chatId } },
       },
     });
 
-    res.status(200).json(response);
+    res.status(200).json(finalResponse);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
