@@ -4,7 +4,9 @@ import EditIcon from "@/assets/editIcon";
 import ChatIcon from "@/assets/chatIcon";
 import CheckIcon from "@/assets/checkIcon";
 import XMarkIcon from "@/assets/xmarkIcon";
-import { useState } from "react";
+import { useState, useContext } from "react";
+
+import { ChatContext } from "@/context/chat-context";
 
 interface HistoryContainerProps {
   key: string;
@@ -26,6 +28,8 @@ const HistoryContainer: React.FC<HistoryContainerProps> = ({
   const [onEdit, setOnEdit] = useState<boolean>(false);
   const [editTitle, setEditTitle] = useState<string>(title);
 
+  const {setCurrentChat} = useContext(ChatContext);
+
   const isClicked = (tempKey: string) => {
     if (tempKey === selected) {
       return "bg-custom-chat_window";
@@ -34,10 +38,16 @@ const HistoryContainer: React.FC<HistoryContainerProps> = ({
     }
   };
   
+  const newChat = async () => {
+    await axios.post("api/chat/create");
+    chatMutate();
+  };
   
   const delChat = async () => {
     await axios.delete("api/chat/delete", { data: { chatId: id } });
     chatMutate();
+    newChat();
+    setCurrentChat('');
   };
 
   const editChat = () => {

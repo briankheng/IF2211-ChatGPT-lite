@@ -11,6 +11,10 @@ function AccountButton() {
     await signOut();
   };
 
+  const handleChangeAcc = async () => {
+    await signOut();
+  };
+
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
@@ -88,7 +92,7 @@ function AccountButton() {
 
             <div
               className="py-2 px-4 text-sm cursor-default hover:bg-gray-700 dropdown"
-              onClick={() => signIn("google")}
+              onClick={handleChangeAcc}
             >
               Change Account
             </div>
