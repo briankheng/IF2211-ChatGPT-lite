@@ -13,8 +13,11 @@ export const AlgoContext = createContext<IAlgoContext>({
 export const AlgoProvider = ({ children }: { children: ReactNode }) => {
   const [currentAlgo, setCurrentAlgo] = useState<string>('');
 
-
   const value: IAlgoContext = { currentAlgo, setCurrentAlgo };
+
+  useEffect(() => {
+    setCurrentAlgo("kmp");
+  }, []);
 
   return <AlgoContext.Provider value={value}>{children}</AlgoContext.Provider>;
 };

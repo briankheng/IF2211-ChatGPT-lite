@@ -4,7 +4,9 @@ import EditIcon from "@/assets/editIcon";
 import ChatIcon from "@/assets/chatIcon";
 import CheckIcon from "@/assets/checkIcon";
 import XMarkIcon from "@/assets/xmarkIcon";
-import { useState } from "react";
+import { useState, useContext } from "react";
+
+import { ChatContext } from "@/context/chat-context";
 
 interface HistoryContainerProps {
   key: string;
@@ -26,6 +28,8 @@ const HistoryContainer: React.FC<HistoryContainerProps> = ({
   const [onEdit, setOnEdit] = useState<boolean>(false);
   const [editTitle, setEditTitle] = useState<string>(title);
 
+  const {setCurrentChat} = useContext(ChatContext);
+
   const isClicked = (tempKey: string) => {
     if (tempKey === selected) {
       return "bg-custom-chat_window";
@@ -33,10 +37,17 @@ const HistoryContainer: React.FC<HistoryContainerProps> = ({
       return "bg-none";
     }
   };
-
+  
+  const newChat = async () => {
+    await axios.post("api/chat/create");
+    chatMutate();
+  };
+  
   const delChat = async () => {
     await axios.delete("api/chat/delete", { data: { chatId: id } });
     chatMutate();
+    newChat();
+    setCurrentChat('');
   };
 
   const editChat = () => {
@@ -44,7 +55,7 @@ const HistoryContainer: React.FC<HistoryContainerProps> = ({
   };
 
   const confirmEdit = async () => {
-    await axios.put("api/chat/update", { chatId: id, title: editTitle });
+    await axios.put("api/chat/update", { data: {chatId: id, title: editTitle} });
     chatMutate();
     setOnEdit(false);
   };
@@ -52,6 +63,10 @@ const HistoryContainer: React.FC<HistoryContainerProps> = ({
   const cancelEdit = () => {
     setEditTitle(title);
     setOnEdit(false);
+  };
+
+  const isTitleOverflow = (el: any) => {
+    return el.scrollWidth > el.clientWidth;
   };
 
   return (
@@ -70,25 +85,20 @@ const HistoryContainer: React.FC<HistoryContainerProps> = ({
         {/* title */}
         {!onEdit && (
           <div className="ml-2">
-            <p
-              className="text-white text-sm"
-              style={{
-                whiteSpace: "nowrap",
-                overflow: "hidden",
-                textOverflow: "gradient",
-                maxWidth: "15ch",
-                backgroundImage:
-                  "linear-gradient(to right, rgba(255,255,255,255), rgba(0,0,0,0))",
-                backgroundClip: "text",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                color: "transparent",
-                opacity: "1",
-              }}
-            >
-              {title}
-            </p>
-          </div>
+          <p
+            className={`text-white text-sm ${
+              isTitleOverflow(document.createElement("p").appendChild(document.createTextNode(title))) ? "bg-gradient-to-r from-white to-transparent" : ""
+            }`}
+            style={{
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              maxWidth: "18ch",
+            }}
+          >
+            {title}
+          </p>
+        </div>
         )}
 
         {/* edit chat */}

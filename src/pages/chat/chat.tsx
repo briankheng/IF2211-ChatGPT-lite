@@ -23,8 +23,10 @@ const Chat = () => {
     chatMutate();
   };
 
+
   const setChat = () => {
     if (!chatLoading && chats) {
+      chatMutate();
       if (currentChat === '' && chats.length>0){
         const lastChat = chats[0].id.toString();
         setCurrentChat(lastChat);  
@@ -37,15 +39,10 @@ const Chat = () => {
     if (!chatLoading && chats) {
       if (chats.length===0){
         newChat();
-        setCurrentChat('');
-      }
+        setCurrentChat(''); 
+      } 
     }
   }, [chats]);
-  
-  useEffect(() => {
-    console.log("masuk useffect");
-    setCurrentAlgo("bm");
-  }, []);
 
   setChat();
 

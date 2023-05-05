@@ -4,23 +4,24 @@ import { BiBrain } from "react-icons/bi";
 import { AlgoContext } from "@/context/algo-context";
 
 const AlgorithmSelect = () => {
-  const [selectedAlgorithm, setSelectedAlgorithm] = useState("Boyer Moore");
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const dropdownRef:any = useRef(null);
 
   const {setCurrentAlgo} = useContext(AlgoContext);
-  
-  useEffect(() => (
-    setCurrentAlgo("bm")
-  ), []);
+
+  useEffect(() => {
+    setSelectedAlgorithm("Knuth-Morris-Pratt");
+  }, []);
 
   const handleAlgorithmChange = (e: any) => {
-    if(e.target.value === "bm") {
-      setSelectedAlgorithm("Boyer Moore");
-    } else {
+    if(e.target.value === "kmp") {
       setSelectedAlgorithm("Knuth-Morris-Pratt");
+      setCurrentAlgo("kmp");
+    } else {
+      setSelectedAlgorithm("Boyer Moore");
+      setCurrentAlgo("bm");
     }
-    setCurrentAlgo(e.target.value);
     setIsDropdownOpen(false);
   };
 

@@ -39,7 +39,7 @@ const ChatWindowPage: React.FC = () => {
 
     const res = await axios.post("api/query", {
       query: query,
-      method: "kmp",
+      method: currentAlgo,
       chatId: currentChat,
     });
     messageMutate();
@@ -53,7 +53,7 @@ const ChatWindowPage: React.FC = () => {
   {!messageLoading && messages && (
     <div className="bg-none shadow rounded-lg overflow-y-scroll h-full">
       {messages.map((msg: any) => (
-        <ChatContainer key={msg.id} sender={msg.user.email} content={msg.text} />
+        <ChatContainer key={msg.id} sender={msg.user.email} content={msg.text} createdAt={msg.createdAt} />
       ))}
       {messages.length === 0 && (
         <div className="container mx-auto mt-5 px-4 flex flex-col items-center justify-center intro h-full">
@@ -97,8 +97,10 @@ const ChatWindowPage: React.FC = () => {
         </div>
       </div>
 
-      <div className="absolute w-full bottom-4 left-1/2 transform -translate-x-1/2">
-        <InputBox message={inputField} onMessageChange={handleMessageChange} onSendMessage={addQuery} />
+      <div className="absolute w-full bottom-4">
+        <div className="md:max-w-2xl lg:max-w-xl xl:max-w-3xl p-4 md:py-6  m-auto p-150 sm:px-4 md:px-5 lg:px-6 xl:px-1">
+            <InputBox message={inputField} onMessageChange={handleMessageChange} onSendMessage={addQuery} />
+        </div>
       </div>
     </main>
   );

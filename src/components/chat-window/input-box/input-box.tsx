@@ -12,6 +12,7 @@ const InputBox: React.FC<InputBoxProps> = ({
   onMessageChange,
   onSendMessage,
 }) => {
+
   const [textAreaHeight, setTextAreaHeight] = useState("auto");
   const [isSendClicked, setIsSendClicked] = useState(false); // new state for checking send button click
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -29,6 +30,23 @@ const InputBox: React.FC<InputBoxProps> = ({
     onSendMessage();
     if (textAreaRef.current) {
       textAreaRef.current.style.height = minHeight; // set height to min height when send button clicked
+    }
+  };
+
+  const onEnterKeyPress = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      onSendMessage();
+      if (textAreaRef.current) {
+        textAreaRef.current.style.height = minHeight; // set height to min height when send button clicked
+      }
+    } else if (event.key === "Enter" && event.shiftKey) {
+      event.preventDefault();
+      onMessageChange({
+        target: {
+          value: message + "\n",
+        },
+      } as React.ChangeEvent<HTMLTextAreaElement>);
     }
   };
 
@@ -59,15 +77,16 @@ const InputBox: React.FC<InputBoxProps> = ({
   }, [isSendClicked]);
 
   return (
-    <div className="bg-custom-input_box relative flex border border-gray-900/50 shadow-[0_0_15px_rgba(0,0,0,0.10)] justify-between rounded-md items-center mx-4 my-4 r p-2 pl-4 w-100 place">
-      <div className="flex w-full items-center">
+    <div className="bg-custom-input_box relative flex border border-gray-900/50 shadow-[0_0_15px_rgba(0,0,0,0.10)] justify-between rounded-md items-center mx-auto my-4 r p-2 pl-4 place sm:mx-10 md:mx-10 xl:mx-5">
+      <div className="flex w-full items-center ">
         <textarea
           className="kotak bg-custom-input_box flex-1 focus:outline-none text-white resize-none mr-5 overflow-auto scrollbar-thin scrollbar-thumb-transparent scrollbar-track-transparent h-full"
           rows={1}
-          placeholder="Send a message..."
+          placeholder="Send a message."
           value={message}
           onChange={onMessageChange}
           onInput={onInput}
+          onKeyDown={onEnterKeyPress}
           ref={textAreaRef}
           id="inputText"
         />
